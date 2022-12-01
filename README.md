@@ -63,3 +63,17 @@ Si se llama con la opción –v, Yacc genera como salida un archivoy.outputque c
 >5. Escriba cc lex.yy.c y.tab.h -ll
 
 >6. Escriba ./a.out
+## DESARROLLO
+#### Palindromo
+En este programa se evalua si una cadena introducida es un palindromo, utilizando lex y yacc, En la parte de Lex solo se le ointroduce los simbolos aceptados que en este caso es de A-Z tanto minusculas como mayusculas, y retorna cualquier otro simbolo.
+
+```
+%%
+
+[a-zA-Z]+ {yylval.f = yytext; return STR;}
+[-+()*/] {return yytext[0];}
+[ \t\n]	 {;}
+
+%%
+```
+Despues manda a llamar a yywrap(), que es la interaccion con el yacc
