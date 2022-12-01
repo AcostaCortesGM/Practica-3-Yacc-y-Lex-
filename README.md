@@ -76,4 +76,40 @@ En este programa se evalua si una cadena introducida es un palindromo, utilizand
 
 %%
 ```
-Despues manda a llamar a yywrap(), que es la interaccion con el yacc
+Despues manda a llamar a yywrap(), que es la interaccion con el archivo pal.y , esye se define primero las librerias y el yylex() del archivo pal.l, se hace la declaracion de flag y algunas variables que vamos a usar para identificar si es palindromo:
+```
+/* Rule Section */
+%%
+
+S : E {
+		flag = 0;
+		k = strlen($1) - 1;
+		if(k%2==0){
+		
+		for (i = 0; i <= k/2; i++) {
+		if ($1[i] == $1[k-i]) {
+			} else {
+			flag = 1;
+			}
+		}
+		if (flag == 1) printf("Not palindrome\n");
+		else printf("palindrome\n");
+		printf("%s\n", $1);
+		
+		}else{
+		
+		for (i = 0; i < k/2; i++) {
+		if ($1[i] == $1[k-i]) {
+		} else {
+			flag = 1;
+			}
+			}
+		if (flag == 1) printf("Not palindrome\n");
+		else printf("palindrome\n");
+		printf("%s\n", $1);	
+		}
+	}
+;```
+Aqui se hace la evaluacion paramertro a parametro y seva comprobando si es igual de izquierda a derecha que de derecha a izquierda.
+Su ejecución es la siguiente:
+
