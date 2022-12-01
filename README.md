@@ -1,5 +1,5 @@
-# Acosta-Cortes-Gerardo-Michel
-# Castillo-Salgado-Edgar-Sebastian
+# Acosta Cortes Gerardo Michel
+# Castillo Salgado Edgar Sebastian
 
 # Yacc-y-lex
 Yacc es un generador es un generador de analizador LALR(LookAhead, Left-to-right), fue diseñado originalmente para ser complementado por Lex.
