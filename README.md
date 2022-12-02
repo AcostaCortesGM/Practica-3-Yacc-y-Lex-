@@ -113,4 +113,6 @@ S : E {
 Aqui se hace la evaluacion paramertro a parametro y seva comprobando si es igual de izquierda a derecha que de derecha a izquierda.
 Su ejecución es la siguiente:
 
+![image](https://github.com/AcostaCortesGM/Practica-3-Yacc-y-Lex-/blob/main/images/IMG-20221201-WA0008.jpg)
 
+##Gramatica en el 
