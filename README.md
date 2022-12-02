@@ -113,3 +113,4 @@ S : E {
 Aqui se hace la evaluacion paramertro a parametro y seva comprobando si es igual de izquierda a derecha que de derecha a izquierda.
 Su ejecución es la siguiente:
 
+
