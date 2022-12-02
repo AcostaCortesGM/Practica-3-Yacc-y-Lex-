@@ -115,4 +115,144 @@ Su ejecución es la siguiente:
 
 ![image](https://github.com/AcostaCortesGM/Practica-3-Yacc-y-Lex-/blob/main/images/IMG-20221201-WA0008.jpg)
 
-##Gramatica en el 
+
+###Gramatica en a y b 
+En este, el archivo lex se declara el lenguaje que va a usar el programa en este caso A y B y a y b, y en el archivo yacc se le hace la declaracion de token y su forma en la que se evalua que se haga la elevación de n números:
+```%token A B NL
+
+/* Rule Section */
+%%
+stmt: S NL { printf("valid string\n");
+			exit(0); }
+;
+S: A S B |
+;
+%%
+
+int yyerror(char *msg)
+{
+printf("invalid string\n");
+exit(0);
+}
+
+//driver code
+main()
+{
+printf("enter the string\n");
+yyparse();
+}
+```
+## Binario a Decimal 
+Aqui se hace una declaracion de lenguaje binario (0 y 1) y se pone varias funciones de bison para poder manejar las cadenas introducidas tanto para validarlas como para rechazarlo:
+```%{
+/* Definition section */
+#include<stdio.h>
+#include<stdlib.h>
+#include"y.tab.h"
+extern int yylval;
+%}
+
+/* Rule Section */
+%%
+0 {yylval=0;return ZERO;}
+1 {yylval=1;return ONE;}
+
+[ \t] {;}
+\n return 0;
+. return yytext[0];
+%%
+
+	
+int yywrap()
+{
+return 1;
+}
+```
+Luego en la parte de yacc se hace la conversion a decimal, aqui se hace leyendo parametro por parametro "$" y aqui se hace que cada parte de el numerobinario sea 2 a la n, donde n es la posicion de izquierda a derecha de la casdena y asi es como se convierte a decimal
+```/* Rule Section */
+%%
+N: L {printf("\n%d", $$);}
+L: L B {$$=$1*2+$2;}
+| B {$$=$1;}
+B:ZERO {$$=$1;}
+|ONE {$$=$1;};
+%%
+
+//driver code``
+###Código par de 0s y 1s 
+En la parte de lex se declaran los simbolos del lenguaje que son 0 y 1 y vamos a definir variables para usar funciones en el codigo yacc:
+```
+%%
+[0] {return A;}
+[1] {return B;}
+\n {return NL;}
+.  return yytext[0];
+%%
+```
+En la parte de yacc definimos funciones para hacer contadores de 0s y 1s, se van haciendo una lectura de la cadena y cada cero y cada uno se va guardando en un arreglo, despues se mete a un bucle en el que se valida si es par o no cada arreglo y se va imprimiendo si es valido para la expresion o no.
+```
+void aumentarCeros() {
+	ceros++;
+}
+
+void aumentarUnos() {
+	unos++;
+}
+
+void validar() {
+
+    printf("\nCeros: %d\n", ceros);
+    printf("Unos: %d\n\n", unos);
+
+	if((ceros%2 == 0 && ceros != 0 ) || (unos %2 == 0 && unos != 0)) {
+        printf("Cadena valida\n");
+    }else{
+        printf("Cadena invalida\n");
+```
+##Numeros capicua de 0 al 1000
+En la parte de lex se define el lenguaje con los numeros del 1 - 10:
+```
+%%
+  
+[0-9]+   {yylval.f = yytext; return STR;}
+[ \t\n]      {;}
+  
+%%
+```
+En la parte sde yacc se hace la comprobación para identificar si es capicua o no, se hace una lectura por parametros, mas o menos como en la parte de palindromos pero ahora con numeros:
+```
+/* Seccion de reglas */
+%%
+
+S : E {
+		flag = 0;
+        k = strlen($1) - 1;
+        if (k % 2 != 0) {
+
+            for (i = 0; i <= k / 2; i++) {
+                if ($1[i] == $1[k - i]) {} else {
+                    flag = 1;
+                }
+            }
+             if (flag == 1) printf("%s no es capicua\n", $1);
+                else printf("%s si es capicua\n", $1);
+
+            exit(0);
+
+        } else {
+
+            for (i = 0; i < k / 2; i++) {
+                if ($1[i] == $1[k - i]) {} else {
+                    flag = 1;
+                }
+            }
+            if (flag == 1) printf("%s no es capicua\n", $1);
+            else printf("%s si es capicua\n", $1);
+
+            exit(0);
+
+        }
+	}
+;
+```
+##Ejecuciones de los programas en la carperta de imagenes 
